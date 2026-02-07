@@ -8,21 +8,17 @@ int main() {
         return 1;
     }
 
-    if (x == 0.0 && y == 0.0) {
-        std::cout << "The point is at the origin." << std::endl;
-    } else if (x == 0.0) {
-        std::cout << "The point is on the Y-axis." << std::endl;
-    } else if (y == 0.0) {
-        std::cout << "The point is on the X-axis." << std::endl;
-    } else if (x > 0.0 && y > 0.0) {
-        std::cout << "Quadrant I." << std::endl;
-    } else if (x < 0.0 && y > 0.0) {
-        std::cout << "Quadrant II." << std::endl;
-    } else if (x < 0.0 && y < 0.0) {
-        std::cout << "Quadrant III." << std::endl;
-    } else {
-        std::cout << "Quadrant IV." << std::endl;
-    }
+    const std::string result =
+        (x == 0.0 && y == 0.0) ? "The point is at the origin." :
+        (x == 0.0) ? "The point is on the Y-axis." :
+        (y == 0.0) ? "The point is on the X-axis." :
+        (x > 0.0 && y > 0.0) ? "Quadrant I." :
+        (x < 0.0 && y > 0.0) ? "Quadrant II." :
+        (x < 0.0 && y < 0.0) ? "Quadrant III." : "Quadrant IV.";
+
+    std::cout << result << std::endl;
+
+    double a = x > 0 ? x : -x;
 
     return 0;
 }
