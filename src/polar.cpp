@@ -1,18 +1,20 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 int main() {
-    double x = 0.0, y = 0.0;
-    std::cout << "Enter x and y: ";
+    double x = 0.0;
+    double y = 0.0;
+
+    std::cout << "Введіть координати x та y: ";
     if (!(std::cin >> x >> y)) {
-        std::cerr << "Invalid input." << std::endl;
+        std::cerr << "Помилка: координати мають бути числами.\n";
         return 1;
     }
 
-    double r = std::sqrt(x * x + y * y);
-    double angle = std::atan2(y, x); // radians
+    const double radius = std::sqrt(x * x + y * y);
+    const double angle = std::atan2(y, x); // atan2 правильно визначає чверть кута.
 
-    std::cout << "Radius: " << r << std::endl;
-    std::cout << "Angle (radians): " << angle << std::endl;
+    std::cout << "Радіус: " << radius << '\n';
+    std::cout << "Полярний кут (радіани): " << angle << '\n';
     return 0;
 }

@@ -1,24 +1,30 @@
 #include <iostream>
 
 int main() {
-    double x = 0.0, y = 0.0;
-    std::cout << "Enter x and y: ";
+    double x = 0.0;
+    double y = 0.0;
+
+    std::cout << "Введіть координати x та y: ";
     if (!(std::cin >> x >> y)) {
-        std::cerr << "Invalid input." << std::endl;
+        std::cerr << "Помилка: координати мають бути числами.\n";
         return 1;
     }
 
-    const std::string result =
-        (x == 0.0 && y == 0.0) ? "The point is at the origin." :
-        (x == 0.0) ? "The point is on the Y-axis." :
-        (y == 0.0) ? "The point is on the X-axis." :
-        (x > 0.0 && y > 0.0) ? "Quadrant I." :
-        (x < 0.0 && y > 0.0) ? "Quadrant II." :
-        (x < 0.0 && y < 0.0) ? "Quadrant III." : "Quadrant IV.";
-
-    std::cout << result << std::endl;
-
-    double a = x > 0 ? x : -x;
+    if (x == 0.0 && y == 0.0) {
+        std::cout << "Точка розташована в початку координат.\n";
+    } else if (x == 0.0) {
+        std::cout << "Точка розташована на осі Y.\n";
+    } else if (y == 0.0) {
+        std::cout << "Точка розташована на осі X.\n";
+    } else if (x > 0.0 && y > 0.0) {
+        std::cout << "Точка розташована у I чверті.\n";
+    } else if (x < 0.0 && y > 0.0) {
+        std::cout << "Точка розташована у II чверті.\n";
+    } else if (x < 0.0 && y < 0.0) {
+        std::cout << "Точка розташована у III чверті.\n";
+    } else {
+        std::cout << "Точка розташована у IV чверті.\n";
+    }
 
     return 0;
 }

@@ -1,14 +1,16 @@
 #include <iostream>
 
 int main() {
-    double a = 0.0, b = 0.0;
-    std::cout << "Enter two numbers: ";
-    if (!(std::cin >> a >> b)) {
-        std::cerr << "Invalid input." << std::endl;
+    double firstNumber = 0.0;
+    double secondNumber = 0.0;
+
+    std::cout << "Введіть два числа: ";
+    if (!(std::cin >> firstNumber >> secondNumber)) {
+        std::cerr << "Помилка: потрібно ввести два числа.\n";
         return 1;
     }
 
-    double product = a * b;
-    std::cout << "Product: " << product << std::endl;
+    const double result = firstNumber * secondNumber;
+    std::cout << "Добуток: " << result << '\n';
     return 0;
 }
