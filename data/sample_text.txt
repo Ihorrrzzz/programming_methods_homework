@@ -1,0 +1,3 @@
+Apple is a fruit. An apple can be green or red.
+This small file is a sample for the word-frequency program.
+APPLE, apple, and apple. are counted as the same word.
