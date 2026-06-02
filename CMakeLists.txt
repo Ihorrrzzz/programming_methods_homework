@@ -87,3 +87,41 @@ astro_apply_common_settings(figure_ellipse)
 add_executable(rectangle_example src/rectangle_main.cpp)
 target_link_libraries(rectangle_example PRIVATE figure_core)
 astro_apply_common_settings(rectangle_example)
+
+if(ASTRO_BUILD_QT)
+    find_package(Qt6 COMPONENTS Widgets QUIET)
+
+    # Homebrew на macOS не завжди додає Qt до стандартних шляхів пошуку CMake.
+    if(NOT Qt6_FOUND AND APPLE)
+        find_program(HOMEBREW_EXECUTABLE brew)
+        if(HOMEBREW_EXECUTABLE)
+            execute_process(
+                COMMAND ${HOMEBREW_EXECUTABLE} --prefix qt
+                OUTPUT_VARIABLE HOMEBREW_QT_PREFIX
+                OUTPUT_STRIP_TRAILING_WHITESPACE
+                ERROR_QUIET
+            )
+            if(HOMEBREW_QT_PREFIX)
+                list(PREPEND CMAKE_PREFIX_PATH ${HOMEBREW_QT_PREFIX})
+                find_package(Qt6 COMPONENTS Widgets QUIET)
+            endif()
+        endif()
+    endif()
+
+    if(Qt6_FOUND)
+        add_executable(qt_date_app MACOSX_BUNDLE src/qt_date_app.cpp)
+        target_link_libraries(qt_date_app PRIVATE Qt6::Widgets date_utils)
+        astro_apply_common_settings(qt_date_app)
+        message(STATUS "Qt 6 found: qt_date_app will be built")
+    else()
+        find_package(Qt5 COMPONENTS Widgets QUIET)
+        if(Qt5_FOUND)
+            add_executable(qt_date_app MACOSX_BUNDLE src/qt_date_app.cpp)
+            target_link_libraries(qt_date_app PRIVATE Qt5::Widgets date_utils)
+            astro_apply_common_settings(qt_date_app)
+            message(STATUS "Qt 5 found: qt_date_app will be built")
+        else()
+            message(STATUS "Qt Widgets not found: qt_date_app target is skipped")
+        endif()
+    endif()
+endif()
