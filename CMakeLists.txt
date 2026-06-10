@@ -125,3 +125,19 @@ if(ASTRO_BUILD_QT)
         endif()
     endif()
 endif()
+
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(date_utils_test tests/date_utils_test.cpp)
+    target_link_libraries(date_utils_test PRIVATE date_utils)
+    astro_apply_common_settings(date_utils_test)
+    add_test(NAME date_utils_test COMMAND date_utils_test)
+
+    if(UNIX)
+        add_test(
+            NAME console_smoke_test
+            COMMAND bash ${PROJECT_SOURCE_DIR}/tests/run_smoke_tests.sh
+                    ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}
+        )
+    endif()
+endif()
